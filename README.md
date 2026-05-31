@@ -42,4 +42,4 @@ If you use this code, please cite the paper (forthcoming). See `docs/arxiv/refer
 
 ## License
 
-Add your chosen license before making the repository public.
+MIT License. See [LICENSE](LICENSE).
