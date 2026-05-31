@@ -1,0 +1,30 @@
+\label{app:methods}
+\section{Additional methodological details}
+\label{app:methods:detail}
+
+\subsection{Average marginal effects}
+
+For logit coefficient $\hat{\beta}_k$ on regressor $x_k$, the average marginal effect is
+\begin{equation}
+  \widehat{\mathrm{AME}}_k = \frac{1}{N}\sum_{i=1}^{N} \hat{p}_i (1-\hat{p}_i)\, \hat{\beta}_k,
+\end{equation}
+where $\hat{p}_i$ is the fitted probability for observation $i$ from the sequential model. For the binary indicator \foullast, we report the average change in $\hat{p}_i$ when the indicator switches from 0 to 1, holding other covariates fixed.
+
+\subsection{Placebo algorithm}
+
+For each placebo draw $b=1,\ldots,100$:
+\begin{enumerate}
+  \item For each game $g$, take the set of foul events and permute their order uniformly at random.
+  \item Recompute \fouldiff, \perioddiff, \foullast, and time since last foul from the permuted order.
+  \item Re-estimate the sequential logit on the placebo panel (without re-clustering for speed).
+  \item Store coefficients on game foul diff, period foul diff, and previous call.
+\end{enumerate}
+The actual-data estimate uses game-clustered standard errors; placebo draws form the reference distribution for order-specific falsification.
+
+\subsection{Sample construction details}
+
+The first foul in each game has no previous foul in that game; the first foul in each period has no within-period foul history for period-differential state. These events remain in the baseline sample but drop from the sequential sample when \foullast\ or \perioddiff\ is undefined. Technical, flagrant, and offensive fouls are excluded from the main sample. Offensive fouls are analyzed separately in heterogeneity tables. Possession-cycle robustness (Table~\ref{tab:possession_robustness}) is reported in Section~\ref{sec:results:possession}.
+
+\input{../tables/appendix_full_regression.tex}
+
+\input{../tables/appendix_clustering.tex}

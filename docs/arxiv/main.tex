@@ -1,0 +1,64 @@
+\documentclass[11pt]{article}
+\input{preamble}
+
+\title{Testing Sequential Dependence in NBA Foul Calls Using Play-by-Play Data}
+
+\author{%
+  Xieheng Wang\thanks{School of Statistics, University of Minnesota. Email: \texttt{wan01626@umn.edu}.}%
+}
+
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We develop a reproducible event-level framework for testing \emph{sequential dependence} in sports officiating outcomes, applied to NBA foul calls from play-by-play data (\sampleseasons{}; 367,046 sequential observations in the main non-offensive sample). The strongest evidence concerns previous-call reversal: when the previous foul was on the home team, the next foul is about five percentage points less likely to be on the home team (sequential logit coefficient $\approx -0.28$). A within-game shuffle placebo (100 draws) eliminates this coefficient (placebo mean $\approx +0.03$; empirical $p=0/100$), supporting falsification targeted at order-defined predictors. Game- and period-level foul-count differentials show weaker and less clean associations under game fixed effects and placebo checks. Offensive fouls---analyzed separately---follow different assignment rules. We characterize results as sequential dependence in foul-call outcomes, not evidence of referee intent or referee-specific behavior.
+\end{abstract}
+
+\noindent\textbf{Keywords:} officiating; play-by-play; sequential dependence; falsification tests; logistic regression
+
+\medskip
+\noindent\textbf{JEL codes:} L83; C25; C23
+
+\tableofcontents
+\clearpage
+
+\section{Introduction}
+\label{sec:intro}
+\input{sections/introduction}
+
+\section{Related literature}
+\input{sections/literature}
+
+\section{Data}
+\input{sections/data}
+
+\section{Empirical strategy}
+\input{sections/methods}
+
+\section{Results}
+\input{sections/results}
+
+\section{Discussion}
+\input{sections/discussion}
+
+\section{Conclusion}
+\input{sections/conclusion}
+
+\section*{Data and code availability}
+\addcontentsline{toc}{section}{Data and code availability}
+\label{app:replication}
+Replication scripts and step-by-step instructions to reproduce the tables and figures are provided in Appendix~\ref{app:replication:code}. Raw play-by-play data are obtained from public NBA sources described in Section~\ref{sec:data}. Upon acceptance, we will release a dedicated public replication repository containing only the analysis code and manuscript sources needed to reproduce the results (excluding exploratory drafts and work-in-progress material from the private research project). Until then, replication materials are available from the author on request.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\appendix
+\input{sections/appendix_replication}
+\input{sections/appendix_validation}
+\input{sections/appendix_robustness}
+\input{sections/appendix_supplementary_figures}
+\input{sections/appendix_methods}
+
+\end{document}

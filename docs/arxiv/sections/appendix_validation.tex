@@ -1,0 +1,38 @@
+\label{app:validation}
+\section{Foul-count validation}
+\label{app:validation:detail}
+
+We compare parsed foul counts from our pipeline to official box-score team foul totals (\texttt{PF}) for a sample of games. The validation script (\texttt{scripts/validate\_foul\_counts.py}) selects games from the games manifest, counts non-technical, non-flagrant fouls assigned to each team in \texttt{foul\_events.csv}, and compares to box-score team fouls.
+
+Table~\ref{tab:validation} reports results for ten games from the opening week of the 2023--24 season (season end year 2024). In all ten games, parsed home and away foul counts equal official totals (difference~$=0$ for both teams).
+
+\begin{table}[htbp]
+\centering
+\caption{Foul-count validation: parsed vs.\ box-score team fouls (10-game sample)}
+\label{tab:validation}
+\small
+\begin{threeparttable}
+\begin{tabular}{llrrrrr}
+\toprule
+Game ID & Matchup & Parsed home & Official home & Parsed away & Official away & Match \\
+\midrule
+0022300061 & LAL @ DEN & 15 & 15 & 18 & 18 & Yes \\
+0022300062 & PHX @ GSW & 23 & 23 & 22 & 22 & Yes \\
+0022300063 & ATL @ CHA & 21 & 21 & 19 & 19 & Yes \\
+0022300064 & WAS @ IND & 23 & 23 & 11 & 11 & Yes \\
+0022300065 & BOS @ NYK & 22 & 22 & 22 & 22 & Yes \\
+0022300066 & HOU @ ORL & 20 & 20 & 24 & 24 & Yes \\
+0022300067 & CLE @ BKN & 16 & 16 & 23 & 23 & Yes \\
+0022300068 & DET @ MIA & 18 & 18 & 23 & 23 & Yes \\
+0022300069 & MIN @ TOR & 18 & 18 & 14 & 14 & Yes \\
+0022300070 & OKC @ CHI & 16 & 16 & 19 & 19 & Yes \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}[flushleft]
+\small
+\item[] Countable fouls exclude technical and flagrant fouls, consistent with the baseline analysis sample. Full output: \texttt{outputs/tables/foul\_validation\_sample.csv}.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+This validation does not audit every game in the eight-season panel. It confirms that the foul-assignment logic reproduces official team foul totals on inspected games. Foul-\emph{type} labels from play-by-play may contain misclassification for specific events; heterogeneity results for residual ``personal'' fouls should be interpreted with that caveat.

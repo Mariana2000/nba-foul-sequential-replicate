@@ -1,0 +1,20 @@
+\label{app:supplementary_figures}
+\section{Supplementary figures}
+\label{app:supplementary_figures:detail}
+
+The pipeline (\texttt{scripts/09\_publication\_figures.py}) writes many exploratory figures to \texttt{outputs/figures/}. Main-text figures use the \texttt{publication\_figure*.png} prefix; the files below are not cited in the body but may be useful for presentations or extensions.
+
+\begin{itemize}
+  \item \texttt{publication\_coefficient\_forest.png} --- key coefficients across model specifications
+  \item \texttt{publication\_season\_coefficients.png} --- all three key terms by season
+  \item \texttt{publication\_marginal\_effects.png} --- AME comparison across models
+  \item \texttt{publication\_model\_comparison\_dual.png} --- sequential logit vs.\ game FE forest plots
+  \item \texttt{publication\_placebo\_all\_terms.png} --- placebo distributions for game diff, period diff, and previous call
+  \item \texttt{publication\_foul\_type\_heatmap.png} / \texttt{publication\_foul\_type\_facets.png} --- foul-type heterogeneity (descriptive and regression)
+  \item \texttt{publication\_predicted\_prob\_heatmap.png} / \texttt{publication\_foul\_diff\_last\_foul\_heatmap.png} --- predicted $P(\text{foul against home})$ by foul state
+  \item \texttt{publication\_playoffs\_vs\_regular\_*.png} --- playoffs vs.\ regular season splits
+  \item \texttt{publication\_bonus\_*.png}, \texttt{publication\_home\_possession.png} --- bonus and possession context
+  \item \texttt{publication\_descriptive\_vs\_model.png} --- raw vs.\ model-implied foul-differential gradient
+\end{itemize}
+
+Regenerate all figures after updating analysis outputs with \texttt{python scripts/09\_publication\_figures.py}.

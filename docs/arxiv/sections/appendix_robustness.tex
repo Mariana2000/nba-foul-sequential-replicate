@@ -1,0 +1,34 @@
+\label{app:robustness}
+\section{Robustness subsamples}
+\label{app:robustness:detail}
+
+Table~\ref{tab:robustness} re-estimates the sequential logit (same specification as Table~\ref{tab:main_regression}, column~2) on subsamples defined in \texttt{scripts/06\_robustness\_checks.py}. Standard errors are clustered by game in the main tables; subsample fits use the same formula without re-reporting full covariate blocks. We highlight coefficients on \fouldiff, \perioddiff, and \foullast.
+
+\begin{table}[htbp]
+\centering
+\caption{Robustness: sequential logit coefficients by subsample}
+\label{tab:robustness}
+\small
+\begin{threeparttable}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lrrrrr}
+\toprule
+Subsample & $N$ & Game foul diff & Period foul diff & Last foul on home & Pseudo $R^2$ \\
+\midrule
+Full sample & 367,046 & $-0.010$ & $-0.069$ & $-0.283$ & 0.195 \\
+Regular season only & 341,808 & $-0.009$ & $-0.068$ & $-0.284$ & 0.194 \\
+Exclude overtime ($period \leq 4$) & 363,980 & $-0.010$ & $-0.069$ & $-0.283$ & 0.195 \\
+Exclude last 2 minutes & 341,431 & $-0.013$ & $-0.074$ & $-0.271$ & 0.192 \\
+Close games ($|margin|\leq 10$) & 246,092 & $-0.012$ & $-0.075$ & $-0.280$ & 0.195 \\
+\bottomrule
+\end{tabular}%
+}
+\begin{tablenotes}[flushleft]
+\small
+\item[] Main sample excludes technical, flagrant, and offensive fouls; all subsamples require non-missing sequential state. Coefficients rounded to three decimals; all reported terms $p<0.001$ in the full sample.
+\item[] Source: \texttt{outputs/tables/robustness\_extended\_summary.csv}.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+The previous-call coefficient remains near $-0.28$ across subsamples reported, including regular season only and games excluding the final two minutes of regulation---suggesting that sequential reversal is not driven solely by playoffs, overtime, or end-game intentional fouling. Period- and game-differential coefficients are also negative throughout, with modest magnitude variation across subsamples.

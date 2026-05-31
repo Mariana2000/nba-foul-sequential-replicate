@@ -1,0 +1,34 @@
+\label{sec:discussion}
+
+This paper provides a reproducible framework for testing sequential dependence in NBA foul-call outcomes. We emphasize a clear hierarchy of evidence: previous-call reversal is the primary finding; foul-count imbalance is secondary and less cleanly identified.
+
+\subsection{What this result does and does not imply}
+\label{sec:discussion:implications}
+
+It is useful to separate three statements that are easy to conflate.
+
+First, the evidence supports \emph{order-specific dependence} in foul-call outcomes: after conditioning on observable game state, the direction of the previous foul call predicts the direction of the next call, and that association is eliminated when foul order is shuffled within games (Table~\ref{tab:placebo}; Figure~\ref{fig:placebo}). The placebo asymmetry---\foullast\ disappears while foul-count terms persist---is exactly what we expect if the previous-call regressor encodes genuine sequential information.
+
+Second, this is \emph{not} evidence of referee intent, referee-specific behavior, or deliberate ``make-up'' calls. We do not observe referee identity, cannot randomize whistle decisions, and report associational patterns throughout. Sequential dependence in outcomes is compatible with many underlying processes.
+
+Third, the estimated association likely reflects a \emph{mixture of mechanisms} rather than a single channel: officiating responses to recent calls, player or team adaptation, possession and game-flow structure, and strategic incentives (bonus, foul trouble, late-game fouling) may all contribute. Our design narrows the claim to order-specific dependence in call direction; it does not adjudicate among these mechanisms.
+
+\subsection{Primary evidence: previous-call reversal}
+
+The previous-call association is large in probability units ($\approx -5$~pp), robust to team fixed effects, negative within games (Table~\ref{tab:game_fe}), and eliminated by within-game order shuffling. It survives shooting-foul subsamples, possession-state splits, and an alternative possession-team outcome (Table~\ref{tab:possession_robustness}). We interpret the pattern as sequential dependence tied to true foul order within games, not as proof that officials target balance by intent.
+
+\subsection{Auxiliary evidence: foul-count differentials}
+
+Period foul imbalance is negatively associated with next-call direction in pooled logits, but attenuates under game fixed effects and persists under placebo shuffling, as expected when permutations preserve period foul counts. Game-total differentials are weaker once \foullast\ is included. We therefore describe foul-count patterns as auxiliary associations partially reflecting game-specific foul environments and count levels---not as parallel pillars to previous-call reversal.
+
+\subsection{Boundaries: offensive fouls and bonus state}
+
+Offensive fouls---excluded from the main sample---show positive previous-call coefficients (Table~\ref{tab:heterogeneity}; Figure~\ref{fig:foul_type}), consistent with different assignment mechanics tied to possession. Bonus indicators shift predicted call direction through incentive channels distinct from short-run reversal. These boundaries caution against pooling all whistle types in a single sequential model.
+
+\subsection{Identification limits}
+
+Referee identity is unobserved; observational data do not randomize foul state; placebo asymmetry is by design (order vs.\ count falsification). Personal-foul subsample magnitudes in heterogeneity tables may reflect play-by-play categorization noise. External validity is limited to NBA \sampleseasons{}.
+
+\subsection{Contribution revisited}
+
+We deliver (i)~a validated foul-event panel, (ii)~a sequential-dependence testing framework with explicit placebo logic, and (iii)~documentation that previous-call reversal is robust in the main sample while foul-count and offensive-foul patterns define scope conditions---a framing suited to quantitative sports analytics rather than narrative claims about officiating bias.

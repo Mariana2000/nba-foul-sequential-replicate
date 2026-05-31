@@ -1,0 +1,26 @@
+\begin{table}[htbp]
+\centering
+\caption{Possession-cycle robustness (sequential logit, clustered by game)}
+\label{tab:possession_robustness}
+\small
+\begin{threeparttable}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{llccc}
+\toprule
+Subsample & $N$ & Last foul on home & Last foul on poss.\ team & Game foul diff \\
+\midrule
+Main sample (excl. offensive) & 356,858 & -0.280 & -0.173 & -0.010 \\
+Shooting fouls only & 186,367 & -0.206 & -0.144 & -0.009 \\
+Home possession only & 161,585 & -0.281 & -0.207 & -0.009 \\
+Away possession only & 195,273 & -0.256 & -0.124 & -0.010 \\
+\bottomrule
+\end{tabular}
+}
+\begin{tablenotes}[flushleft]
+\small
+\item[] Main sample excludes technical, flagrant, and offensive fouls.
+\item[] ``Last foul on possession team'' uses outcome \texttt{foul\_against\_possession\_team} and lagged possession-team indicator; other columns use the home-team outcome specification.
+\item[] Tests whether previous-call reversal survives shooting-foul subsamples and possession states.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}

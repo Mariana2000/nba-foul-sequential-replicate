@@ -1,0 +1,46 @@
+\label{sec:methods}
+
+\subsection{Main sample and outcome}
+
+The main analysis sample includes non-technical, non-flagrant, non-offensive personal fouls---the foul types most comparable for sequential defensive/shooting whistle dynamics. Offensive fouls are excluded from all main tables and figures because they follow different assignment rules (Section~\ref{sec:data} and Section~\ref{sec:results:heterogeneity}). Technical and flagrant fouls are also excluded.
+
+The outcome is an indicator that the current foul is called on the home team. Let $Y_{ig}$ denote this indicator for foul event $i$ in game $g$. Standard errors are clustered by \texttt{game\_id} in all logit specifications unless noted otherwise.
+
+\subsection{Baseline and sequential logit}
+
+Let $\Lambda(\cdot)$ denote the logistic cdf. The baseline model is
+\begin{equation}
+  \Pr(Y_{ig}=1)=\Lambda\!\left(\alpha+\beta_1 D^{\mathrm{game}}_{ig}+X_{ig}'\gamma\right),
+  \label{eq:baseline}
+\end{equation}
+where $D^{\mathrm{game}}_{ig}$ is \fouldiff\ and $X_{ig}$ includes score margin, home possession, period indicators, seconds remaining, and season fixed effects.
+
+The sequential model adds period-level imbalance, previous-call direction, and elapsed time since the last foul:
+\begin{equation}
+  \Pr(Y_{ig}=1)=\Lambda\!\left(\alpha+\beta_1 D^{\mathrm{game}}_{ig}+\beta_2 D^{\mathrm{period}}_{ig}+\beta_3 L_{ig}+\delta\,\Delta t_{ig}+X_{ig}'\gamma\right),
+  \label{eq:sequential}
+\end{equation}
+where $D^{\mathrm{period}}_{ig}$ is \perioddiff, $L_{ig}$ is \foullast, and $\Delta t_{ig}$ is \texttt{time\_since\_last\_foul}. We interpret $\beta_3<0$ as previous-call reversal---the primary pattern of interest. Coefficients on foul-count differentials are auxiliary; their interpretation is less clean under game fixed effects and placebo checks (below).
+
+Extensions add bonus indicators and team fixed effects to \eqref{eq:sequential}. Average marginal effects (AMEs) are computed from the sequential logit; for a regressor $x_k$, we report
+\begin{equation}
+  \widehat{\mathrm{AME}}_k=\frac{1}{N}\sum_{i=1}^{N}\hat{p}_i(1-\hat{p}_i)\,\hat{\beta}_k,
+\end{equation}
+where $\hat{p}_i$ is the fitted probability from the sequential model (details in Appendix~\ref{app:methods}).
+
+\subsection{Game fixed-effects LPM}
+
+Within-game variation identifies associations net of time-invariant game factors (teams, unobserved game flow). We estimate a linear probability model with game fixed effects and the same covariates as \eqref{eq:sequential}, clustering standard errors by game. We report an LPM rather than a conditional logit with game fixed effects because high-dimensional game fixed effects in logit are computationally costly at our sample size.
+
+\subsection{Placebo test and falsification logic}
+
+The placebo test randomly permutes foul order within each game (100 independent draws), recomputes sequential state, and re-estimates \eqref{eq:sequential}.
+
+\paragraph{Design implication.}
+Shuffle placebo is a valid falsification for order-defined predictors such as $L_{ig}$: if true within-game order matters, destroying order should break the association. It is not intended to eliminate foul-count differentials, because permutations preserve team foul totals within games. Therefore:
+\begin{itemize}
+  \item Elimination of the \foullast{} coefficient under placebo supports order-specific sequential dependence.
+  \item Persistence of period/game differential coefficients under placebo indicates that those terms partly reflect count levels, not the same order-specific channel.
+\end{itemize}
+
+Section~\ref{sec:results:possession} reports possession-cycle robustness (Table~\ref{tab:possession_robustness}) using shooting-foul subsamples, possession-state splits, and an alternative outcome \texttt{foul\_against\_possession\_team}.

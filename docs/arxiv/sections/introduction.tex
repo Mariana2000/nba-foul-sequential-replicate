@@ -1,0 +1,29 @@
+Fouls shape incentives throughout an NBA game: bonus thresholds, foul trouble, and late-game strategy. Analysts and broadcasters often describe short runs of whistles as ``balanced,'' but box scores alone cannot test whether \emph{call direction} depends on recent fouls. We provide a reproducible event-level framework for testing sequential dependence in foul-call outcomes---associations in observational data, not claims about referee intent or referee-specific behavior.
+
+\subsection{Why sequential foul calls matter}
+
+NBA foul calls are not isolated events. Each whistle changes bonus status, player foul trouble, defensive aggression, and late-game strategy. Because these calls occur in rapid sequence within a possession-heavy sport, short-run dependence in \emph{call direction} can arise from several distinct channels: officiating responses to recent calls, player or team adaptation, mechanical possession cycles, or incentive-driven contact. A foul-count differential summarizes how many fouls each team has accumulated, but it does not uniquely identify whether the \emph{previous} call direction predicts the next. Distinguishing order-specific dependence from count-level imbalance is therefore a useful quantitative problem for sports analytics---one that requires event-level state, within-game falsification, and clear scope conditions on foul type.
+
+For quantitative sports analytics, the contribution is methodological as much as empirical: we build a large foul-event panel (\sampleseasons{}; 10,188 games; 367,046 sequential observations in the main sample), estimate clustered sequential models with game fixed effects, and implement a within-game shuffle placebo designed to break order-defined predictors while preserving foul totals. The central empirical question is narrow but consequential: does the direction of the previous foul call predict the direction of the next call, after conditioning on observable game state?
+
+\subsection{Motivation and research question}
+
+Whistle calls are high-frequency decisions embedded in continuous game flow. We ask whether the direction of the previous foul call predicts the direction of the next call, conditional on score, possession, period, clock, and season. Auxiliary predictors include game- and period-level foul differentials. Our primary estimand is previous-call reversal; foul-count imbalance is a secondary pattern whose interpretation is less clean under fixed effects and placebo checks (Section~\ref{sec:results}).
+
+We construct a foul-event panel from NBA play-by-play with explicit pre-call state. The main outcome is whether the foul is called on the home team. This paper identifies sequential dependence in foul-call outcomes, not referee-specific behavior; we do not observe referee identity and report associational evidence throughout.
+
+\subsection{Preview of results}
+
+Descriptively, $P(\text{foul against home})$ is near 0.50 after the previous foul was on the away team versus about 0.47 after it was on the home team---roughly a five percentage-point gap. In the sequential logit, the previous-call coefficient is about $-0.28$ (AME $\approx -5$~pp). It survives team fixed effects and remains negative within games (game FE LPM). A within-game shuffle placebo (100 draws) drives the previous-call coefficient to the positive placebo range (mean $\approx +0.03$; empirical $p=0/100$). By contrast, period foul imbalance is negatively associated in pooled models but attenuates under game fixed effects and persists under placebo shuffling; we treat foul-count patterns as auxiliary. Offensive fouls (excluded from the main sample) show opposite-signed dynamics and are analyzed separately.
+
+\subsection{Contribution}
+
+\begin{enumerate}
+  \item A reproducible foul-event panel with pre-call state (\fouldiff, \perioddiff, \foullast, bonus, score, possession, clock).
+  \item A sequential-dependence testing framework: clustered logit, game fixed-effects LPM, average marginal effects, and within-game shuffle placebo with clearly stated falsification targets.
+  \item Documentation of robust previous-call reversal in the main (non-offensive) sample, with boundaries defined by offensive fouls, bonus incentives, possession-cycle checks, and weaker foul-count associations.
+\end{enumerate}
+
+\subsection{Roadmap}
+
+Section~\ref{sec:literature} reviews related work. Section~\ref{sec:data} describes the panel and sample construction. Section~\ref{sec:methods} outlines the empirical strategy and placebo design. Section~\ref{sec:results} presents results; Section~\ref{sec:discussion} and Section~\ref{sec:conclusion} interpret findings and limitations.

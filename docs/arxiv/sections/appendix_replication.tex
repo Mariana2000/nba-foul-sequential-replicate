@@ -1,0 +1,27 @@
+\section{Replication instructions}
+\label{app:replication:code}
+
+This appendix summarizes how to reproduce all tables and figures in the paper from raw downloads. A dedicated public replication repository (released upon acceptance) will contain the scripts, Python package, and \texttt{paper/} LaTeX sources described below; it will exclude exploratory notebooks and draft notes from the private working repository.
+
+\paragraph{Environment.}
+Install Python dependencies (\texttt{pip install -r requirements.txt}) and set \texttt{PYTHONPATH=src} so that the \texttt{whistle\_balance} package imports correctly.
+
+\paragraph{Pipeline (in order).}
+\begin{enumerate}
+  \item \texttt{scripts/01\_download\_nba\_pbp.py} --- download play-by-play and box scores (season end years 2018--2025 by default).
+  \item \texttt{scripts/02\_clean\_pbp.py} --- standardize play-by-play fields.
+  \item \texttt{scripts/03\_build\_foul\_events.py} --- construct \texttt{data/processed/foul\_events.csv}.
+  \item \texttt{scripts/08\_publication\_analysis.py} --- clustered logits, game FE LPM, AMEs, placebo (100 draws), heterogeneity models.
+  \item \texttt{scripts/13\_jqas\_possession\_robustness.py} --- possession-cycle robustness (Table~\ref{tab:possession_robustness}).
+  \item \texttt{scripts/09\_publication\_figures.py} --- publication figures including Figures~\ref{fig:main}--\ref{fig:hetero} and the standalone placebo and foul-type plots.
+  \item \texttt{scripts/10\_export\_manuscript\_tables.py} --- export Tables~\ref{tab:main_regression}--\ref{tab:heterogeneity} to \texttt{docs/tables/}.
+  \item \texttt{scripts/12\_export\_journal\_appendix.py} --- appendix regression and clustering tables.
+  \item \texttt{scripts/06\_robustness\_checks.py} --- subsample robustness (Appendix~\ref{app:robustness}).
+  \item \texttt{scripts/validate\_foul\_counts.py} --- box-score validation (Appendix~\ref{app:validation}).
+\end{enumerate}
+
+\paragraph{Compiling the manuscript.}
+From \texttt{docs/arxiv/}, run \texttt{latexmk -pdf main.tex} after generating figures and tables. Table~\ref{tab:summary} is maintained in \texttt{docs/tables/table1\_summary.tex}; Tables~2--7 are regenerated from CSV outputs in \texttt{outputs/tables/}.
+
+\paragraph{Random seeds.}
+Placebo draws use seeds 42--141 (100 draws). Other stochastic steps are documented in \texttt{src/whistle\_balance/publication.py}.

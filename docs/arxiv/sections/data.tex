@@ -1,0 +1,36 @@
+\label{sec:data}
+
+\subsection{Source and coverage}
+
+We download play-by-play data via \texttt{nba\_api} (PlayByPlayV3) for seasons \sampleseasons{} (regular season and playoffs). Season year~$t$ denotes the NBA season ending in calendar year~$t$. The raw panel contains 414,588 foul events across 10,188 games after parsing whistle actions from play-by-play. Each row is one foul with team assignment and pre-call state measured before the whistle.
+
+\subsection{Sample construction}
+
+Figure~\ref{fig:sample_flow} summarizes how we move from the raw panel to the samples used in main tables. After excluding technical and flagrant fouls (13,061 events removed), 401,527 fouls remain. The main baseline sample further excludes offensive fouls, yielding 376,696 fouls. Requiring non-missing \foullast\ and \perioddiff\---undefined for the first foul in a game or period---reduces the sequential regression sample to 367,046 observations. These counts are stable across the eight-season window and form the basis for Tables~\ref{tab:summary} and~\ref{tab:main_regression}.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.92\textwidth]{publication_sample_flow.png}
+  \caption{Sample construction from play-by-play foul events to the baseline and sequential regression samples used in main tables. Offensive fouls follow a separate heterogeneity path (Table~6).}
+  \label{fig:sample_flow}
+\end{figure}
+
+\subsection{Why offensive fouls are excluded from the main sample}
+
+The main analysis sample retains fouls that are (i)~not technical or flagrant, (ii)~not offensive fouls, and (iii)~non-missing on baseline controls and sequential state for regression samples. Excluding offensive fouls is not a mechanical sample trim: these events follow different rule and strategic logic from defensive and shooting whistles.
+
+Offensive fouls---charges, moving screens, and related calls---are intrinsically tied to possession. The team charged is typically the offense, reflecting turnover-like outcomes rather than defensive contact on a shooter. Players and officials face different incentives on these plays than on shooting or loose-ball fouls. Pooling offensive fouls with defensive whistles would mix assignment mechanisms that need not share the same sequential dynamics.
+
+Table~\ref{tab:heterogeneity} (Panel~A) and Figure~\ref{fig:foul_type} confirm this boundary empirically: the previous-call coefficient is negative for shooting, loose-ball, and personal fouls but \emph{positive} for offensive fouls (+0.72). We therefore analyze offensive fouls only in heterogeneity models while keeping the main sample restricted to non-offensive personal fouls.
+
+\subsection{Key variables}
+
+The outcome is \texttt{foul\_against\_home}, an indicator that the current foul is charged to the home team. Main sequential predictors are \fouldiff\ (game foul differential before the call), \perioddiff\ (period foul differential), and \foullast\ (whether the previous foul in the game was on the home team). Controls include score margin, home possession, period, seconds remaining in the game, and season fixed effects; extensions add bonus indicators and team fixed effects.
+
+Table~\ref{tab:summary} reports means and sample sizes for the baseline main sample. The unconditional $P(\text{foul against home})$ is near 0.50, so our contribution is conditional sequential dependence rather than a constant home tilt in foul rates.
+
+\subsection{Validation}
+
+Parsed foul counts match box-score team fouls in a ten-game audit (Appendix~\ref{app:validation}; 10/10 exact matches). This check confirms that team foul assignment in the pipeline aligns with official totals on inspected games; it does not audit every game in the panel.
+
+\input{../tables/table1_summary.tex}

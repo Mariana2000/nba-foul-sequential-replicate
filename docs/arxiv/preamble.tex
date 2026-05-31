@@ -1,0 +1,36 @@
+% Shared preamble for arXiv manuscript
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{threeparttable}
+\usepackage{multirow}
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage{microtype}
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  citecolor=blue,
+  urlcolor=blue
+}
+\usepackage{natbib}
+\usepackage{caption}
+\captionsetup{font=small,labelfont=bf}
+
+\usepackage{adjustbox}
+\usepackage{array}
+\renewcommand{\arraystretch}{1.08}
+
+\graphicspath{{../../outputs/figures/}}
+
+% NBA API season code: year t = season ending in calendar year t (e.g.\ 2018 = 2017--18).
+\newcommand{\sampleseasons}{2017--18 through 2024--25}
+\newcommand{\sampleseasonsend}{2018--2025}
+
+\newcommand{\foullast}{\texttt{last\_foul\_against\_home}}
+\newcommand{\fouldiff}{\texttt{foul\_diff\_home\_minus\_away\_before}}
+\newcommand{\perioddiff}{\texttt{period\_foul\_diff\_home\_minus\_away\_before}}

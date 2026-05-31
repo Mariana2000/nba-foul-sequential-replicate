@@ -1,0 +1,95 @@
+\label{sec:results}
+
+\subsection{Descriptive patterns: previous-call reversal}
+\label{sec:results:desc}
+
+Figure~\ref{fig:main}, panel~A, shows the core descriptive fact: $P(\text{foul against home})$ is higher after the previous foul was on the away team than after it was on the home team---a gap of roughly five percentage points in the main (non-offensive) sample. Panels~B--C display foul-differential gradients; panel~D plots sequential logit predictions. We treat panel~A and the previous-call regression as primary; differential gradients provide descriptive context for auxiliary foul-count terms.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{publication_figure1_main_results.png}
+  \caption{Descriptive patterns (main sample). \emph{Panel A:} previous-call direction. \emph{Panels B--C:} period and game foul differentials. \emph{Panel D:} model-adjusted predictions.}
+  \label{fig:main}
+\end{figure}
+
+\subsection{Main regression: previous-call reversal}
+\label{sec:results:main}
+
+Table~\ref{tab:main_regression} reports clustered logits and game FE LPM for the main sequential specification. In column~(2), \foullast\ enters negatively and precisely ($\hat{\beta}=-0.283$). Once \foullast\ is included, \fouldiff\ is small ($\hat{\beta}=-0.010$) and \perioddiff\ is negative ($\hat{\beta}=-0.069$) but, as we argue below, is interpreted as auxiliary.
+
+\input{../tables/table2_main_regression.tex}
+
+The stability of the previous-call coefficient across columns~(2)--(4) is substantively important. Adding bonus indicators (column~3) and team fixed effects (column~4) leaves \foullast\ near $-0.30$ ($\hat{\beta}=-0.299$ and $-0.298$, respectively). If previous-call reversal merely reflected team-specific foul-draw or bonus-incentive differences, we would expect sharper attenuation once those controls enter. Instead, the coefficient is essentially unchanged, suggesting that short-run call-direction dynamics are not explained away by stationary team styles or bonus status alone. Column~(5) shows that \foullast\ remains negative within games in the game FE LPM ($\hat{\beta}=-0.046$), aligning with a within-game sequential channel rather than only cross-game composition.
+
+\subsection{Magnitudes and within-game identification}
+\label{sec:results:margins}
+
+Table~\ref{tab:marginal_effects} translates logit coefficients into probability units. The AME for \foullast\ is $-0.053$: switching from ``previous foul on away'' to ``previous foul on home'' lowers the predicted probability of a home foul by about 5.3 percentage points, holding other covariates at their sample values. For comparison, the AME for a one-unit increase in \perioddiff\ is $-0.013$ and for \fouldiff\ is $-0.0018$---an order of magnitude smaller---which supports our emphasis on previous-call reversal over foul-count terms in the sequential model.
+
+The bottom rows of Table~\ref{tab:marginal_effects} report nonlinear summaries at foul diff $=0$: predicted $P(\text{foul against home})$ is 0.525 after the previous foul was on the away team versus 0.472 after it was on the home team, a 5.3-point gap matching the AME. These magnitudes are large relative to typical game-state variation in whistle rates and are easy to communicate beyond log-odds units.
+
+\input{../tables/table4_marginal_effects.tex}
+
+Table~\ref{tab:game_fe} contrasts sequential logit coefficients with the game FE LPM on the same covariates. \foullast\ remains negative in both specifications; \perioddiff\ shrinks toward zero under game fixed effects, consistent with weaker within-game identification for period-level count imbalance once game-specific levels are absorbed.
+
+\input{../tables/table3_game_fe.tex}
+
+\subsection{Placebo: strongest falsification for \foullast}
+\label{sec:results:placebo}
+
+Table~\ref{tab:placebo} reports 100 within-game shuffle draws. The actual \foullast\ coefficient ($\hat{\beta}=-0.283$) lies far below the placebo distribution (mean $\approx +0.03$; all 100 draws positive; empirical $p=0/100$). This is the paper's strongest identification evidence: destroying within-game foul order eliminates the previous-call association while leaving foul totals unchanged, exactly as the falsification design in Section~\ref{sec:methods} predicts for an order-defined predictor.
+
+By contrast, period and game differential coefficients remain negative under placebo because permutations preserve within-game foul counts. That asymmetry is not a failure of the placebo---it distinguishes order-specific dependence from count-level association. Figure~\ref{fig:placebo} makes the separation visually stark: the actual estimate sits in the left tail of a placebo distribution centered slightly above zero.
+
+\input{../tables/table5_placebo.tex}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.92\textwidth]{publication_figure_placebo.png}
+  \caption{Previous-call reversal in actual vs.\ shuffled foul order. Density of \foullast\ coefficients from 100 within-game shuffle placebo draws; vertical line at the actual sequential logit estimate ($\hat{\beta}=-0.283$).}
+  \label{fig:placebo}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{publication_figure2_robustness.png}
+  \caption{Stability, magnitude, and within-game robustness of previous-call reversal. \emph{Panel A} shows the descriptive previous-call probability gap by season, defined as $P(\text{home foul}\mid\text{previous foul on away}) - P(\text{home foul}\mid\text{previous foul on home})$. Positive values indicate previous-call reversal. \emph{Panel B} reports average marginal effects from the sequential logit; negative values indicate a lower probability that the next foul is called on the home team. \emph{Panel C} compares probability-scale effects from the sequential logit (AME) and the game fixed-effects LPM on the same covariates.}
+  \label{fig:robust}
+\end{figure}
+
+Figure~\ref{fig:robust}, panel~A, reports the descriptive previous-call gap in percentage points for each season. The gap is positive and stable (roughly 4--6~pp across 2017--18 through 2024--25), indicating that a home-team foul is less likely immediately after a previous home-team foul. Panel~B shows that the previous-foul AME ($\approx -5.3$~pp) is an order of magnitude larger than the game- and period-foul differential AMEs, consistent with the evidence hierarchy in Section~\ref{sec:results:main}. Panel~C places sequential logit AMEs and game FE LPM effects on a common probability-point scale; \foullast\ remains negative under within-game identification, while period- and game-foul differentials attenuate relative to the pooled logit.
+
+\subsection{Heterogeneity and boundaries}
+\label{sec:results:heterogeneity}
+
+Table~\ref{tab:heterogeneity} and Figure~\ref{fig:foul_type} define scope conditions. Shooting and loose-ball fouls show negative previous-call coefficients similar to the main sample. We focus interpretation on shooting and loose-ball fouls; the residual personal category is compositionally mixed and its large coefficients should not be read as literal marginal effects. Offensive fouls---excluded from the main sample---show a positive coefficient (+0.72), indicating a distinct mechanism rather than homogeneous ``balancing.'' Figure~\ref{fig:hetero} summarizes descriptive heterogeneity across game context (playoffs, score margin, overtime).
+
+\input{../tables/table6_heterogeneity.tex}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.88\textwidth]{publication_figure_foul_type_coef.png}
+  \caption{Previous-call coefficient by foul type. Sequential logit estimated separately on each foul-type subsample (clustered by game). Offensive fouls are analyzed outside the main sample.}
+  \label{fig:foul_type}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{publication_figure3_heterogeneity.png}
+  \caption{Descriptive heterogeneity across game context. Period-foul gradients by playoffs and score margin; previous-call pattern in regulation vs.\ overtime.}
+  \label{fig:hetero}
+\end{figure}
+
+\subsection{Possession-cycle robustness}
+\label{sec:results:possession}
+
+A natural concern is that previous-call reversal reflects mechanical possession alternation rather than order-specific dependence in whistle direction. Basketball possessions alternate between teams; if fouls tend to cluster on the team without the ball, a negative coefficient on \foullast\ could arise without any within-sequence balancing beyond possession structure.
+
+Table~\ref{tab:possession_robustness} addresses this concern directly. Restricting to shooting fouls---the subset most clearly tied to defensive contact on a shooter---\foullast\ remains negative ($\hat{\beta}=-0.206$). Splitting by possession state (home vs.\ away possession) leaves a negative coefficient in both subsamples ($-0.281$ and $-0.256$). Redefining the outcome as whether the foul is against the team in possession (\texttt{foul\_against\_possession\_team}) and using the lagged possession-team indicator yields a negative ``last foul on possession team'' coefficient ($\hat{\beta}=-0.173$). None of these checks eliminate previous-call reversal; they reduce the plausibility that the main result is purely an artifact of alternating possessions.
+
+\input{../tables/table7_possession_robustness.tex}
+
+\subsection{Additional robustness subsamples}
+\label{sec:results:robustness}
+
+Appendix Table~\ref{tab:robustness} shows that \foullast\ remains near $-0.28$ when excluding overtime, restricting to regular season, or dropping the final two minutes. Additional exploratory figures are listed in Appendix~\ref{app:supplementary_figures}.
