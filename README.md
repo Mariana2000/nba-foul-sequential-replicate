@@ -2,6 +2,8 @@
 
 Replication code for *Testing Sequential Dependence in NBA Foul Calls Using Play-by-Play Data*.
 
+**Repository:** https://github.com/Mariana2000/nba-foul-sequential-replicate
+
 This repository is a **public replication package**. It contains the pipeline, Python package, and manuscript sources needed to reproduce the paper's tables and figures. It intentionally excludes exploratory notebooks, draft notes, and work-in-progress analyses from the private research repository.
 
 ## Quick start
